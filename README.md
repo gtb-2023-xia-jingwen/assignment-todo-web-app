@@ -17,8 +17,10 @@
 ```
 // 进入前端目录
 cd assignment-todo-js
+
 // 下载依赖
 npm install
+
 // 启动前端服务
 npm start
 
@@ -34,14 +36,15 @@ npm run test:e2e
 
 
 ### 启动后端环境
-确保以下命令是在 assignment-todo-java-web-ap 目录下执行
+确保以下命令是在 assignment-todo-java-web-api 目录下执行
 ```
-// 进入前端目录
-cd assignment-todo-java-web-ap
+// 进入后端目录
+cd assignment-todo-java-web-api
 
-./gradlew build
+// 构建后端项目
+./gradlew clean build
 
-// 启动 docker 服务
+// 启动 基于 docker 的 mysql 容器
 ./start-mysql-from-docker.sh
 
 // 启动后端服务
@@ -54,5 +57,3 @@ cd assignment-todo-java-web-ap
 - 如果没有在规定时长完成所有需求也没有关系，buddy 主要看大家在这个过程中的思路，**不要写完只讲代码，要录写的过程**；
 - 通过金数据表单提交 assignment，Assignment Repo Name 填写：`assignment-todo-web-app` ，提交成功后会收到系统通知；
 - buddy 批改会使用提交时间点所对应的版本，请务必在确认无误后再进行提交；
-
-
