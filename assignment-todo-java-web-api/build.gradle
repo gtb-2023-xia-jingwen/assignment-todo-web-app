@@ -1,0 +1,17 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:30.0-jre'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.22'
+}
+
+application {
+    mainClass = 'tw.cn.cap.gtb.todo.TodoApp'
+}

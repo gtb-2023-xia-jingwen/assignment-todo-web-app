@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:8.0.22
+    restart: always
+    container_name: todoapp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "p@ssword"
+      MYSQL_DATABASE: "todoapp"
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./data:/var/lib/mysql

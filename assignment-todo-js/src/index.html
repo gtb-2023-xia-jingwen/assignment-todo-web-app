@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <main>
+      <h1 class="slogan">Use this to manage your life and work</h1>
+      <section class="input-section">
+        <input type="text" placeholder="Enter your todo item" id="todo-input" />
+        <button type="button" id="add-todo">
+          <i class="bi-plus-lg"></i>
+        </button>
+      </section>
+      <p id="input-error" class="alert-error">Please input something first.</p>
+      <section class="todos-section todos-section--inbox">
+        <ul id="todo-lists">
+          <!-- 列表由 js 根据后端 api 返回数据渲染，html 结构参考下来注释部分
+          <li>
+            <input id="1" class="input-checkbox" type="checkbox" />
+            <label data-id="1"> task name </label>
+            <i class="bi-trash" data-id="1"></i>
+          </li> 
+        --></ul>
+      </section>
+      <section class="todos-section todos-section--completed">
+        <p><strong>Completed</strong></p>
+        <ul id="completed-lists">
+          <!--  列表由 js 根据后端 api 返回数据渲染 -->
+        </ul>
+      </section>
+    </main>
+  </body>
+  <script src="./scripts/index.js" type="module"></script>
+</html>

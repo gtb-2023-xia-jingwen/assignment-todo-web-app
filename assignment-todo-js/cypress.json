@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:1234",
+  "video": false,
+  "env": {
+    "API": "http://localhost:8080/tasks",
+    "scene": "frontend"
+  }
+}

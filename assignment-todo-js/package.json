@@ -1,0 +1,31 @@
+{
+  "name": "assignment-html-css",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "lint": "eslint --fix src/**/*.js",
+    "test": "cypress run --headless",
+    "test:e2e": "cypress run --headless --env scene=e2e",
+    "test:open": "cypress open",
+    "server": "json-server --watch json-server/api.json -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "devDependencies": {
+    "cypress": "^8.7.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1",
+    "parcel": "^2.0.1",
+    "@parcel/transformer-sass": "^2.0.1",
+    "json-server": "^0.16.3"
+  }
+}
