@@ -7,7 +7,7 @@ describe('Delete task item', () => {
        * 提交代码前请确保启用该条命令
        */
       cy.exec(
-        'mysql -h127.0.0.1 -uroot -pp@ssword -P13306 -e "USE todoapp;TRUNCATE TABLE tasks;" >/dev/null 2>&1'
+        'mysql -h127.0.0.1 -uroot -pp@ssword -P13306 -e "USE todoapp;TRUNCATE TABLE tasks;"'
       );
     } else {
       /**
