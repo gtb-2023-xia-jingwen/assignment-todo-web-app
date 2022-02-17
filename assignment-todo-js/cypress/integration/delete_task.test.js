@@ -14,7 +14,7 @@ describe('Delete task item', () => {
        * reset json-server 数据
        * 该命令用来初始化数据，测试的时候连的是 json-server，启用下面这条命令，
        */
-      cy.exec('cat json-server/test.json > json-server/api.json');
+      cy.exec('node reset.js');
     }
 
     cy.visit('/');

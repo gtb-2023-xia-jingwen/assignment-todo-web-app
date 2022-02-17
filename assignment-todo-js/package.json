@@ -9,6 +9,7 @@
     "test": "cypress run --headless",
     "test:e2e": "cypress run --headless --env scene=e2e",
     "test:open": "cypress open",
+    "test:open:e2e": "cypress open --env scene=e2e",
     "server": "json-server --watch json-server/api.json -p 8080"
   },
   "keywords": [],
