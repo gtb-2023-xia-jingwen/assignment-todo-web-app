@@ -68,6 +68,7 @@ main {
 
 .todos-section {
   &--inbox {
+    min-height: 140px;
     overflow: scroll;
   }
 
