@@ -54,22 +54,6 @@
 
 ![switch-checked](document/mark.gif)
 
-### Story 5 修改 Task 内容
-
-作为一个用户，我可以修改已经创建的 Task 内容。
-
-**提示：需要适当的修改 ul>li 内部的 html 标签来实现 label 和 input 编辑框的切换**
-
-#### AC 1 编辑完成
-
-* 当鼠标点击 Task 内容区域，显示 input 输入框，自动focus，placeholder 为当前内容，用户可以输入新的内容，按 "回车键"，修改成功，显示新的内容，输入框消失。
-
-#### AC 1 取消编辑
-
-* 当鼠标点击 Task 内容区域，显示 input 输入框，自动focus，点击其他地方，输入框消失，原来 Task 内容不变。
-
-![edit](document/edit.gif)
-
 
 ## 架构图
 ![todo-list](document/architecture.png)
