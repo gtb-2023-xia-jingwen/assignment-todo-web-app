@@ -143,10 +143,10 @@ npm run test:e2e
 #### 运行单个测试
 ```
 // 默认是前端的测试 （启用 json-server 的时候）
-cypress run --spec "cypress/integration/add_task.test.js"
+npm run test --spec "cypress/integration/add_task.test.js"
 
 // 如果想跑单个的端到端测试
-cypress run --spec "cypress/integration/add_task.test.js" --env scene=e2e
+npm run test --spec "cypress/integration/add_task.test.js" --env scene=e2e
 ```
 
 如果测试失败，可以在 `cypress/screenshots` 查看失败的截图
