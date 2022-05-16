@@ -205,7 +205,7 @@ PUT /tasks/{id}
 
 ### RESPONSE
 
-查询成功会返回更新后的 task
+更新成功会返回更新后的 task
 
 #### Status
 
