@@ -14,7 +14,7 @@ describe('Add task items', () => {
        * reset json-server 数据
        * 该命令用来初始化数据，测试的时候连的是 json-server，启用下面这条命令，
        */
-      cy.exec('node reset.js');
+      cy.writeFile('json-server/api.json', { tasks: [] });
     }
 
     cy.visit('/');
