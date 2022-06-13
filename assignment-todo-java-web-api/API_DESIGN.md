@@ -47,6 +47,8 @@ POST /tasks
 
 ### REQUEST
 
+#### Body
+
 提供 task 对象的以下字段：
 
 | 字段:类型       | 是否必需 | 说明    |
@@ -99,7 +101,9 @@ $ curl -X POST 'localhost:8080/tasks'
 
 GET /tasks
 
-### REQUEST PARAMETER
+### REQUEST
+
+#### PARAMETER
 
 `completed`: 是否完成。true 表示完成，false 表示未完成。
 
@@ -198,6 +202,8 @@ PUT /tasks/{id}
 
 ### REQUEST
 
+#### Body
+
 | 字段:类型             | 说明     |
 |-------------------|--------|
 | name:string       | 任务名称。  |
@@ -250,6 +256,8 @@ DELETE /tasks/{id}
 
 ### REQUEST
 
+#### Path Variable
+
 | 字段:类型   | 说明     |
 |---------|--------|
 | id:long | 任务 ID。 |
@@ -268,5 +276,6 @@ DELETE /tasks/{id}
 
 ```shell
 $ curl -X DELETE 'localhost:8080/tasks/1'
+# 无 Request Body
 # 无 Response Body
 ```
