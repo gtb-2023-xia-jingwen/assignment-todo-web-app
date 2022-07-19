@@ -2,9 +2,9 @@ version: '3.3'
 
 services:
   db:
-    image: mysql:8.0.22
-    restart: always
+    image: mysql:8.0.29
     container_name: todoapp_db
+    user: "${UID}"
     environment:
       MYSQL_ROOT_PASSWORD: "p@ssword"
       MYSQL_DATABASE: "todoapp"
