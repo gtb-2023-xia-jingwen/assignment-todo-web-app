@@ -1,28 +1,12 @@
 describe('Render task list', () => {
-  const mockData = [
-    {
-      name: 'task01',
-      completed: false,
-      id: 1,
-    },
-    {
-      name: 'task02',
-      completed: false,
-      id: 2,
-    },
-    {
-      name: 'task03',
-      completed: true,
-      id: 3,
-    },
-  ];
+  const inputTasks = ['task 01', 'task 02'];
 
   beforeEach(() => {
-    cy.intercept('GET', Cypress.env('API'), {
-      statusCode: 200,
-      body: mockData,
-    });
     cy.visit('/');
+
+    inputTasks.forEach((i) => {
+      cy.get('#todo-input').clear().type(` ${i}`).next().click();
+    });
   });
 
   it('should render todo task list initially', () => {
@@ -32,16 +16,6 @@ describe('Render task list', () => {
       .children('input')
       .should('have.attr', 'type', 'checkbox')
       .next()
-      .contains(mockData[1].name);
-  });
-
-  it('should render completed task list initially', () => {
-    cy.get('#completed-lists li').should('have.length', 1);
-    cy.get('#completed-lists li')
-      .first()
-      .children('input')
-      .should('have.attr', 'type', 'checkbox')
-      .next()
-      .contains(mockData[2].name);
+      .contains(inputTasks[1]);
   });
 });
