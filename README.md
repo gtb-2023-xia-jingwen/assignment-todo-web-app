@@ -9,7 +9,7 @@
 前端部分的介绍请查看 `assignment-todo-js/README.md`
 
 后端部分的修改在当前目录下的 `assignment-todo-java-web-api`  
-前端部分的介绍请查看 `assignment-todo-java-web-api/README.md`
+后端部分的介绍请查看 `assignment-todo-java-web-api/README.md`
 
 ## setup
 ### 启动前端环境
