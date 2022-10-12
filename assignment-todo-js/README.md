@@ -165,20 +165,3 @@ node_modules/.bin/cypress run test --spec "cypress/integration/add_task.test.js"
 ```bash
 $ npm run lint
 ```
-
-## 我应该学到什么？
-
-Assignment 的目的是学以致用，在运用当前 step 所学的知识和技能合理完成题目要求的前提下，你 应该/可能 会使用（但不限于）以下内容：
-
-1. 使用 git 完成本地的提交管理及与远端的各种同步操作；
-2. 使用 npm 安装项目依赖，运行项目，运行测试脚本等基本操作；
-3. 使用 JavaScrip 完成 Web Page 的开发：
-   - 异步请求 promise：获取 API 数据，提交数据
-   - 数组，对象的操作：本地数据的管理
-   - DOM 操作：渲染页面（插入，修改 DOM 元素及属性等）
-   - 事件监听以及处理： 处理页面上的交互动作
-   - modules：拆分 JS 文件 (import && export) 
-4. 了解当前端对后端有依赖的时候，可以使用 mock server 代替；
-5. 了解 Cypress 测试
-
-**如果你在完成 assignment 后，发现以上的大部分内容都并未涉及（使用）到，请及时联系 coach 进行沟通。**
