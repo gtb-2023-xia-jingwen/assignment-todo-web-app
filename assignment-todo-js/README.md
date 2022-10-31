@@ -1,10 +1,10 @@
-# TODO List JS Assignment
+# Todo List JS Assignment
 
 ## 需求说明
 
 ### Story 1 显示 Task 列表
 
-作为一个用户，我应当能看到已经添加过的 Task。包括 TODO 列表和 Completed 列表。  
+作为一个用户，我应当能看到已经添加过的 Task，包括 Todo 列表和 Completed 列表。  
 若 Task Items 较多，则会出现纵向滚动条。 效果如下：
 ![todo-list](document/list.jpg)
 
@@ -14,27 +14,27 @@
 
 #### AC 1 添加 Task
 
-* 我应当能够在输入框（就是 Enter you todo item 那个输入框）中输入 TODO item 的内容（内容为纯文本）。
-* 当我输入完毕之后，点击 “+” 按钮就可以在 TODO 列表中第一个位置添加一个新的 item，且它的文本应该和我输入的文本一致。
-* 当新的 task 添加完毕之后，应当清空输入框中的文字。
+* 当用户在输入框输入内容之后，点击 “+” 按钮可以在 Todo 列表中第一个位置添加一个新的 item。
+* 当新的 task 添加完成之后，应当清空输入框中的文字。
 
 #### AC 2 避免开头和结尾的空格
 
-* 当我输入的文本的开头和结尾含有空白字符的时候，在添加过程中应当去掉这些空白字符。例如我输入 “  Good  ”，则最终添加的内容应当是 “Good”。空白字符以 `String.prototype.trim` 的默认情况为准。
+* 当用户输入的文本的开头和结尾含有空白字符的时候，在添加过程中应当去掉这些空白字符。例如我输入 “  Good  ”，则最终添加的内容应当是 “Good”。空白字符以 `String.prototype.trim` 的默认情况为准。
 
 #### AC 3 错误检查
 
-* 当我输入的文本为空文本时，或我输入的文本全部为空白字符的时候。应当显示一个错误消息：“Please input something first.”
-* 错误消息的应当在 Enter your todo item 下方。
-* 但是当我成功的添加了一个 Task 之后，错误信息应当消失。
+* 当用户在输入框没有输入内容，或输入的内容全部为空白字符的时候，在输入框下方显示一个错误消息：“Please input something first.”
+* 当用户成功的添加了一个 Task 之后，错误信息消失。
 
 ![add](document/add-task.gif)
 
 ### Story 3 删除待办事项
 
+作为一个用户，我希望能够删除不需要的 Task
+
 #### AC 1 删除未完成的 Task item
 
-* 当鼠标放在 TODO task item 上时，显示"删除"按钮，点击"删除"按钮，该条 item 从列表消失。
+* 当鼠标放在 Todo task item 上时，显示"删除"按钮，点击"删除"按钮，该条 item 从列表消失。
 
 #### AC 1 删除已完成的 Task item
 
@@ -45,12 +45,12 @@
 
 ### Story 4 标记完成状态
 
-作为一个用户，我希望更明显的显示一个 Task item 是否已经完成。这样我更容易看清整体的任务情况。
+作为一个用户，当我变更 Task 状态的时候，希望能够明显的观察到他们的位置变化，这样我更容易看清整体的任务情况。
 
 #### AC 1 完成状态的显示与切换
 
-* 当一个 TODO task item 被标记为完成状态（checkbox 被勾选）的时候，item 应该从 TODO List 移除，并且出现在 Completed List。
-* 当一个 TODO task item 被重新激活（checkbox 取消勾选）的时候，item 应该从 Completed List 移除，并且出现在 TODO List。
+* 当一个 Todo task item 被标记为完成状态（checkbox 被勾选）的时候，item 应该从 Todo List 移除，并且出现在 Completed List。
+* 当一个 Todo task item 被重新激活（checkbox 取消勾选）的时候，item 应该从 Completed List 移除，并且出现在 Todo List。
 
 ![switch-checked](document/mark.gif)
 
