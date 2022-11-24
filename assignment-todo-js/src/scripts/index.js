@@ -4,6 +4,7 @@ import {
   addBtnClickHandler,
   delBtnClickHandler,
   showListHandler,
+  checkBoxClickHandler,
 } from './eventHandler';
 
 const addBtn = document.querySelector('#add-todo');
@@ -13,3 +14,4 @@ showListHandler();
 
 addBtn.addEventListener('click', addBtnClickHandler);
 main.addEventListener('click', delBtnClickHandler);
+main.addEventListener('click', checkBoxClickHandler);

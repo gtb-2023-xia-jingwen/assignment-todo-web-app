@@ -25,3 +25,16 @@ export const deleteTask = (id) =>
     .catch((error) => {
       console.error('Error:', error);
     });
+
+export const putTask = (id, task) =>
+  fetch(`${URL}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(task),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Error:', error);
+    });

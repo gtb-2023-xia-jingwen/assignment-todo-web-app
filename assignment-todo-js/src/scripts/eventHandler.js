@@ -1,4 +1,4 @@
-import { postNewTask, deleteTask, fetchData } from './api';
+import { postNewTask, deleteTask, fetchData, putTask } from './api';
 import { renderTasks } from './render';
 import { taskList } from './variable';
 
@@ -51,4 +51,38 @@ export function delBtnClickHandler(event) {
   }
   const { id } = target.dataset;
   deleteTask(id).then(() => showListHandler());
+}
+
+export function checkBoxClickHandler(event) {
+  const { target } = event;
+  if (target.getAttribute('class') !== 'input-checkbox') {
+    return;
+  }
+  const pNode = target.parentNode;
+  const ppNode = pNode.parentNode;
+  const label = pNode.querySelector('label');
+  let status = false;
+  if (ppNode.getAttribute('id') === 'todo-lists') {
+    status = true;
+  }
+  const task = {
+    name: label.textContent,
+    completed: status,
+  };
+  const { id } = label.dataset;
+  putTask(id, task).then(() => {
+    // eslint-disable-next-line no-shadow
+    let task = null;
+    let i = 0;
+    for (; i < taskList.length; i++) {
+      if (taskList[i].id === parseInt(id, 10)) {
+        task = taskList[i];
+        task.completed = status;
+        break;
+      }
+    }
+    taskList.splice(i, 1);
+    taskList.splice(0, 0, task);
+    renderTasks(taskList);
+  });
 }
