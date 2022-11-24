@@ -3,6 +3,7 @@ const completedContainer = document.querySelector('#completed-lists');
 
 function getHtmlTxtList(data, isDone) {
   const htmlTxt = data
+    .reverse()
     .filter((dat) => dat.completed === isDone)
     .map(
       ({
@@ -19,9 +20,9 @@ function getHtmlTxtList(data, isDone) {
 }
 
 export function renderTodoList(data) {
-  todoContainer.innerHTML = getHtmlTxtList(data.reverse(), false);
+  todoContainer.innerHTML = getHtmlTxtList(data, false);
 }
 
 export function renderCompletedList(data) {
-  completedContainer.innerHTML = getHtmlTxtList(data.reverse(), true);
+  completedContainer.innerHTML = getHtmlTxtList(data, true);
 }
