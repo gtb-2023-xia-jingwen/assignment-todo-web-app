@@ -14,3 +14,9 @@
 - 点击删除按钮，删除当前task
     - 绑定点击事件 DELETE DOM
         - 删除当前task后，重新拉取数据进行渲染
+
+4. 修改指定id的task
+- 勾选待完成task的checkbox，将其从待完成列表中移除，并添加到已完成列表的末尾
+    - 绑定点击事件 PUT DOM
+        - 在进行DOM操作时，先置taskList中指定id的task的状态为完成，然后再进行渲染操作
+- 取消勾选完成task的checkbox的实现思路，如上
