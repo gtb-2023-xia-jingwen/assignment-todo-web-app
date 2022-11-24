@@ -2,7 +2,7 @@ const todoContainer = document.querySelector('#todo-lists');
 const completedContainer = document.querySelector('#completed-lists');
 
 function getHtmlTxtList(data, isDone) {
-  return data
+  return [...data]
     .reverse()
     .filter((dat) => dat.completed === isDone)
     .map(
