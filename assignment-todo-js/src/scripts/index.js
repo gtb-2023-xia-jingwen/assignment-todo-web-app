@@ -14,7 +14,7 @@ fetchData().then((data) => {
 });
 
 function readAndClearInputData() {
-  const res = inputBox.value;
+  const res = inputBox.value.trim();
   inputBox.value = '';
   return res;
 }
