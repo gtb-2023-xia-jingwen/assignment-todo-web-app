@@ -14,6 +14,11 @@
       "name": "task 03",
       "completed": false,
       "id": 3
+    },
+    {
+      "name": "task 04",
+      "completed": true,
+      "id": 4
     }
   ]
 }
