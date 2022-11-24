@@ -1,5 +1,11 @@
 const URL = 'http://localhost:8080/tasks';
-export const fetchData = () => fetch(URL).then((response) => response.json());
+
+// eslint-disable-next-line import/no-mutable-exports
+let dat = [];
+
+export const fetchData = () =>
+  // eslint-disable-next-line no-return-assign
+  fetch(URL).then((response) => (dat = response.json()));
 
 export function postNewTask(title) {
   const task = {
@@ -13,7 +19,7 @@ export function postNewTask(title) {
     },
     body: JSON.stringify(task),
   })
-    .then((response) => response.json())
+    .then((response) => dat.push(response.json()))
     .catch((error) => {
       console.error('Error:', error);
     });
