@@ -1,28 +1,22 @@
 import '../styles/todo-lists.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { fetchData, postNewTask } from './api';
-import { renderCompletedList, renderTodoList } from './render';
+import { renderTasks } from './render';
+
+const inputBox = document.querySelector('#todo-input');
+const addBtn = document.querySelector('#add-todo');
 
 let taskList = [];
 
 fetchData().then((data) => {
   taskList = data;
-  renderTodoList(taskList);
-  renderCompletedList(taskList);
+  renderTasks(taskList);
 });
-
-const addBtn = document.querySelector('#add-todo');
-const inputBox = document.querySelector('#todo-input');
 
 function readAndClearInputData() {
   const res = inputBox.value;
   inputBox.value = '';
   return res;
-}
-
-function renderNewTask(data) {
-  renderTodoList(data);
-  renderCompletedList(data);
 }
 
 function addNewTask() {
@@ -33,7 +27,7 @@ function addNewTask() {
   };
   postNewTask(task).then((newTask) => {
     taskList.push(newTask);
-    renderNewTask(taskList);
+    renderTasks(taskList);
   });
 }
 

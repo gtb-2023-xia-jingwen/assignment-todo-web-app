@@ -2,7 +2,7 @@ const todoContainer = document.querySelector('#todo-lists');
 const completedContainer = document.querySelector('#completed-lists');
 
 function getHtmlTxtList(data, isDone) {
-  const htmlTxt = data
+  return data
     .reverse()
     .filter((dat) => dat.completed === isDone)
     .map(
@@ -16,13 +16,18 @@ function getHtmlTxtList(data, isDone) {
             <i class="bi-trash" data-id="${id}"></i></li>`
     )
     .join('');
-  return htmlTxt;
 }
 
-export function renderTodoList(data) {
+function renderTodoList(data) {
   todoContainer.innerHTML = getHtmlTxtList(data, false);
 }
 
-export function renderCompletedList(data) {
+function renderCompletedList(data) {
   completedContainer.innerHTML = getHtmlTxtList(data, true);
+}
+
+// eslint-disable-next-line import/prefer-default-export
+export function renderTasks(data) {
+  renderTodoList(data);
+  renderCompletedList(data);
 }
