@@ -19,9 +19,9 @@ function getHtmlTxtList(data, isDone) {
 }
 
 export function renderTodoList(data) {
-  todoContainer.innerHTML = getHtmlTxtList(data, false);
+  todoContainer.innerHTML = getHtmlTxtList(data.reverse(), false);
 }
 
 export function renderCompletedList(data) {
-  completedContainer.innerHTML = getHtmlTxtList(data, true);
+  completedContainer.innerHTML = getHtmlTxtList(data.reverse(), true);
 }
