@@ -5,6 +5,7 @@ import { renderTasks } from './render';
 
 const inputBox = document.querySelector('#todo-input');
 const addBtn = document.querySelector('#add-todo');
+const errP = document.querySelector('#input-error');
 
 let taskList = [];
 
@@ -19,16 +20,29 @@ function readAndClearInputData() {
   return res;
 }
 
+function showErrMsg() {
+  errP.style.display = 'block';
+}
+
+function hiddenErrMsg() {
+  errP.style.display = 'none';
+}
+
 function addNewTask() {
   const inputData = readAndClearInputData();
-  const task = {
-    name: inputData,
-    completed: false,
-  };
-  postNewTask(task).then((newTask) => {
-    taskList.push(newTask);
-    renderTasks(taskList);
-  });
+  if (inputData === '') {
+    showErrMsg();
+  } else {
+    const task = {
+      name: inputData,
+      completed: false,
+    };
+    postNewTask(task).then((newTask) => {
+      taskList.push(newTask);
+      renderTasks(taskList);
+      hiddenErrMsg();
+    });
+  }
 }
 
 addBtn.addEventListener('click', addNewTask);
