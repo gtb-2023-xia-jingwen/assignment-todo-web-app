@@ -1,48 +1,15 @@
 import '../styles/todo-lists.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { fetchData, postNewTask } from './api';
+import { fetchData } from './api';
 import { renderTasks } from './render';
+import { addBtnClickHandler } from './eventHandler';
+import { taskList } from './variable';
 
-const inputBox = document.querySelector('#todo-input');
 const addBtn = document.querySelector('#add-todo');
-const errP = document.querySelector('#input-error');
-
-let taskList = [];
 
 fetchData().then((data) => {
-  taskList = data;
+  data.forEach((v) => taskList.push(v));
   renderTasks(taskList);
 });
 
-function readAndClearInputData() {
-  const res = inputBox.value.trim();
-  inputBox.value = '';
-  return res;
-}
-
-function showErrMsg() {
-  errP.style.display = 'block';
-}
-
-function hiddenErrMsg() {
-  errP.style.display = 'none';
-}
-
-function addNewTask() {
-  const inputData = readAndClearInputData();
-  if (inputData === '') {
-    showErrMsg();
-  } else {
-    const task = {
-      name: inputData,
-      completed: false,
-    };
-    postNewTask(task).then((newTask) => {
-      taskList.push(newTask);
-      renderTasks(taskList);
-      hiddenErrMsg();
-    });
-  }
-}
-
-addBtn.addEventListener('click', addNewTask);
+addBtn.addEventListener('click', addBtnClickHandler);
