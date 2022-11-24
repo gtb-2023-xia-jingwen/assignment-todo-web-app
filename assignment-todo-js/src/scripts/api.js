@@ -16,3 +16,12 @@ export const postNewTask = (task) =>
     .catch((error) => {
       console.error('Error:', error);
     });
+
+export const deleteTask = (id) =>
+  fetch(`${URL}/${id}`, {
+    method: 'DELETE',
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Error:', error);
+    });

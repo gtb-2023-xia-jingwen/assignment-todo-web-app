@@ -1,4 +1,4 @@
-import { postNewTask } from './api';
+import { postNewTask, deleteTask, fetchData } from './api';
 import { renderTasks } from './render';
 import { taskList } from './variable';
 
@@ -34,4 +34,21 @@ export function addBtnClickHandler() {
       hiddenErrMsg();
     });
   }
+}
+
+export function showListHandler() {
+  fetchData().then((data) => {
+    taskList.splice(0, taskList.length);
+    data.forEach((v) => taskList.push(v));
+    renderTasks(taskList);
+  });
+}
+
+export function delBtnClickHandler(event) {
+  const { target } = event;
+  if (!target.matches('I')) {
+    return;
+  }
+  const { id } = target.dataset;
+  deleteTask(id).then(() => showListHandler());
 }
