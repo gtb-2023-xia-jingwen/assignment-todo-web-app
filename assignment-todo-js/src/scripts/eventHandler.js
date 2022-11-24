@@ -46,7 +46,7 @@ export function showListHandler() {
 
 export function delBtnClickHandler(event) {
   const { target } = event;
-  if (!target.matches('I')) {
+  if (target.getAttribute('class') !== 'bi-trash') {
     return;
   }
   const { id } = target.dataset;
