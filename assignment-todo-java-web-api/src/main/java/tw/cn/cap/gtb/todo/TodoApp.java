@@ -1,5 +1,6 @@
 package tw.cn.cap.gtb.todo;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -17,7 +18,12 @@ public class TodoApp {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         initialize();
+        try {
+            TaskHttpServer.startServer();
+        } catch (IOException e) {
+            LOGGER.info(e.getMessage());
+        }
     }
 }
