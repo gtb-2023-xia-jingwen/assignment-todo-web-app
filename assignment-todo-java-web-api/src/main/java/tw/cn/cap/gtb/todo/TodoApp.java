@@ -1,11 +1,23 @@
 package tw.cn.cap.gtb.todo;
 
+import java.sql.SQLException;
+import java.util.logging.Logger;
+
 public class TodoApp {
-    public String getGreeting() {
-        return "Hello World!";
+    static final Logger LOGGER = Logger.getLogger(TodoApp.class.getName());
+
+    static TaskRepository taskRepository = new TaskRepository();
+
+    private static void initialize() {
+        try {
+            taskRepository.createTable();
+            LOGGER.info("Initialize successfully.");
+        } catch (SQLException e) {
+            LOGGER.info("Initialize failed. " + e);
+        }
     }
 
     public static void main(String[] args) {
-        System.out.println(new TodoApp().getGreeting());
+        initialize();
     }
 }
