@@ -18,6 +18,7 @@ public class TaskHttpServer {
     static final Logger LOGGER = Logger.getLogger(HttpServer.class.getName());
     public static final int BAD_REQUEST = 400;
     public static final int OK = 200;
+    public static final int NOT_FOUND = 404;
     static TaskRepository taskRepository = new TaskRepository();
     public static final int CREATED = 201;
     public static final int INTERNAL_SERVER_ERROR = 500;
@@ -31,6 +32,7 @@ public class TaskHttpServer {
     }
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
+        exchange.getResponseHeaders().set("Content-Type", "Application/json");
         String reqMethod = exchange.getRequestMethod();
         LOGGER.info(reqMethod);
         switch (reqMethod) {
@@ -40,13 +42,53 @@ public class TaskHttpServer {
             case "GET":
                 handleGETAllTasksRequest(exchange);
                 break;
+            case "PUT":
+                handleModifyTask(exchange);
+                break;
             default:
                 break;
         }
     }
 
+    private static void handleModifyTask(HttpExchange exchange) throws IOException {
+        String[] path = exchange.getRequestURI().getPath().split("/");
+        boolean isParamOK = true;
+        long id = -1;
+        if (path.length != 3) {
+            isParamOK = false;
+        } else {
+            try {
+                id = Integer.parseInt(path[2]);
+            } catch (NumberFormatException e) {
+                isParamOK = false;
+            }
+        }
+        if (!isParamOK) { // 400
+            String msg = "Invalid Parameters.";
+            sendMsg(msg.getBytes(), exchange, BAD_REQUEST);
+            return;
+        }
+
+        try {
+            // 查询id是否存在
+            boolean isExist = taskRepository.getTaskById(id);
+            if (!isExist) {
+                String msg = "Not Found.";
+                sendMsg(msg.getBytes(), exchange, NOT_FOUND);
+                return;
+            }
+            // 执行更新操作
+            ObjectMapper mapper = new ObjectMapper();
+            Task task = mapper.readValue(exchange.getRequestBody(), Task.class);
+            task.setId(id);
+            taskRepository.updateTask(task); // 500
+            sendMsg(mapper.writeValueAsBytes(task), exchange, OK);
+        } catch (SQLException e) {
+            sendMsg(e.getMessage().getBytes(), exchange, INTERNAL_SERVER_ERROR);
+        }
+    }
+
     private static void handleGETAllTasksRequest(HttpExchange exchange) throws IOException {
-        exchange.getResponseHeaders().set("Content-Type", "Application/json");
         ObjectMapper mapper = new ObjectMapper();
         String param = exchange.getRequestURI().getQuery();
         try {
@@ -56,7 +98,7 @@ public class TaskHttpServer {
                 filterTasks = tasks.stream().filter(Task::isCompleted).collect(Collectors.toList());
             }
             if ("completed=false".equals(param)) {
-                filterTasks = tasks.stream().filter(t-> !t.isCompleted()).collect(Collectors.toList());
+                filterTasks = tasks.stream().filter(t -> !t.isCompleted()).collect(Collectors.toList());
             }
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             mapper.writeValue(out, filterTasks);
@@ -67,7 +109,6 @@ public class TaskHttpServer {
     }
 
     private static void handlePostRequest(HttpExchange exchange) throws IOException {
-        exchange.getResponseHeaders().set("Content-Type", "Application/json");
         ObjectMapper objectMapper = new ObjectMapper();
         Task task = null;
         try {
@@ -81,7 +122,7 @@ public class TaskHttpServer {
             task.setId(id);
             task.setCompleted(false);
             sendMsg(objectMapper.writeValueAsBytes(task), exchange, CREATED);
-        } catch (SQLException | JsonProcessingException e ) {
+        } catch (SQLException | JsonProcessingException e) {
             sendMsg(e.getMessage().getBytes(), exchange, INTERNAL_SERVER_ERROR);
         }
     }

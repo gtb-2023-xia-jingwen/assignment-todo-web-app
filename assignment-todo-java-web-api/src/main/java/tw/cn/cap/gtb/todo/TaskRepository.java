@@ -62,4 +62,30 @@ public class TaskRepository {
             return tasks;
         }
     }
+
+    public void updateTask(Task task) throws SQLException {
+        try (
+                Connection conn = getConnection();
+                PreparedStatement pstat = conn.prepareStatement(
+                        "UPDATE `tasks` SET `name`=?, `completed`=?  WHERE `id`=?");
+        ) {
+            pstat.setString(1, task.getName());
+            pstat.setBoolean(2, task.isCompleted());
+            pstat.setLong(3, task.getId());
+            pstat.executeUpdate();
+        }
+    }
+
+    public boolean getTaskById(long id) throws SQLException {
+        try(
+                Connection conn = getConnection();
+                PreparedStatement pstat = conn.prepareStatement("" +
+                        "SELECT * FROM `tasks` WHERE `id`=?");
+                ){
+            pstat.setLong(1, id);
+            ResultSet rs = pstat.executeQuery();
+            return rs.next();
+        }
+
+    }
 }
