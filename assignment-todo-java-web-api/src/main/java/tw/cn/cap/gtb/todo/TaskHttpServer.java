@@ -21,7 +21,7 @@ public class TaskHttpServer {
 
     public static void startServer() throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-        HttpContext context = server.createContext("/");
+        HttpContext context = server.createContext("/task");
         context.setHandler(TaskHttpServer::handleRequest);
         server.start();
     }
