@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskRepository {
     final static String USER = "root";
@@ -40,6 +42,24 @@ public class TaskRepository {
             ResultSet rs = pstat.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
+        }
+    }
+
+    public List<Task> getAllTask() throws SQLException {
+        try (
+                Connection conn = getConnection();
+                PreparedStatement pstat = conn.prepareStatement("SELECT * FROM `tasks`");
+        ) {
+            ResultSet rs = pstat.executeQuery();
+            List<Task> tasks = new ArrayList<>();
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                String name = rs.getString("name");
+                boolean completed = rs.getBoolean("completed");
+                Task task = new Task(id, name, completed);
+                tasks.add(task);
+            }
+            return tasks;
         }
     }
 }
