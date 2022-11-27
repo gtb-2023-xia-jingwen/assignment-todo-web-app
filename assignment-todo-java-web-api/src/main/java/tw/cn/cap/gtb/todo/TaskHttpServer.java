@@ -19,6 +19,7 @@ public class TaskHttpServer {
     public static final int BAD_REQUEST = 400;
     public static final int OK = 200;
     public static final int NOT_FOUND = 404;
+    public static final int NO_CONTENT = 204;
     static TaskRepository taskRepository = new TaskRepository();
     public static final int CREATED = 201;
     public static final int INTERNAL_SERVER_ERROR = 500;
@@ -45,30 +46,37 @@ public class TaskHttpServer {
             case "PUT":
                 handleModifyTask(exchange);
                 break;
+            case "DELETE":
+                handleDeleteTask(exchange);
+                break;
             default:
                 break;
         }
     }
 
-    private static void handleModifyTask(HttpExchange exchange) throws IOException {
-        String[] path = exchange.getRequestURI().getPath().split("/");
-        boolean isParamOK = true;
-        long id = -1;
-        if (path.length != 3) {
-            isParamOK = false;
-        } else {
-            try {
-                id = Integer.parseInt(path[2]);
-            } catch (NumberFormatException e) {
-                isParamOK = false;
+    private static void handleDeleteTask(HttpExchange exchange) throws IOException {
+        // 参数校验
+        Long id = checkParams(exchange);
+        if (id == null) return;
+        try {
+            // 查询id是否存在
+            boolean isExist = taskRepository.getTaskById(id);
+            if (!isExist) {
+                String msg = "Not Found.";
+                sendMsg(msg.getBytes(), exchange, NOT_FOUND);
+                return;
             }
+            // 执行删除操作
+            taskRepository.deleteTaskById(id); // 500
+            sendMsg("".getBytes(), exchange, NO_CONTENT);
+        } catch (SQLException e) {
+            sendMsg(e.getMessage().getBytes(), exchange, INTERNAL_SERVER_ERROR);
         }
-        if (!isParamOK) { // 400
-            String msg = "Invalid Parameters.";
-            sendMsg(msg.getBytes(), exchange, BAD_REQUEST);
-            return;
-        }
+    }
 
+    private static void handleModifyTask(HttpExchange exchange) throws IOException {
+        Long id = checkParams(exchange);
+        if (id == null) return;
         try {
             // 查询id是否存在
             boolean isExist = taskRepository.getTaskById(id);
@@ -86,6 +94,27 @@ public class TaskHttpServer {
         } catch (SQLException e) {
             sendMsg(e.getMessage().getBytes(), exchange, INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private static Long checkParams(HttpExchange exchange) throws IOException {
+        String[] path = exchange.getRequestURI().getPath().split("/");
+        boolean isParamOK = true;
+        Long id = null;
+        if (path.length != 3) {
+            isParamOK = false;
+        } else {
+            try {
+                id = Long.parseLong(path[2]);
+            } catch (NumberFormatException e) {
+                isParamOK = false;
+            }
+        }
+        if (!isParamOK) { // 400
+            String msg = "Invalid Parameters.";
+            sendMsg(msg.getBytes(), exchange, BAD_REQUEST);
+            return null;
+        }
+        return id;
     }
 
     private static void handleGETAllTasksRequest(HttpExchange exchange) throws IOException {

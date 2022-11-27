@@ -77,15 +77,26 @@ public class TaskRepository {
     }
 
     public boolean getTaskById(long id) throws SQLException {
-        try(
+        try (
                 Connection conn = getConnection();
                 PreparedStatement pstat = conn.prepareStatement("" +
                         "SELECT * FROM `tasks` WHERE `id`=?");
-                ){
+        ) {
             pstat.setLong(1, id);
             ResultSet rs = pstat.executeQuery();
             return rs.next();
         }
 
+    }
+
+    public void deleteTaskById(long id) throws SQLException {
+        try (
+                Connection conn = getConnection();
+                PreparedStatement pstat = conn.prepareStatement(
+                        "DELETE FROM `tasks` WHERE `id`=?")
+        ) {
+            pstat.setLong(1, id);
+            pstat.executeUpdate();
+        }
     }
 }
