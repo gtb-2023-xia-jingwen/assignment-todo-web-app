@@ -34,6 +34,9 @@ public class TaskHttpServer {
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
         exchange.getResponseHeaders().set("Content-Type", "Application/json");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*"); // 跨源访问
+        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
         String reqMethod = exchange.getRequestMethod();
         LOGGER.info(reqMethod);
         switch (reqMethod) {
@@ -49,9 +52,17 @@ public class TaskHttpServer {
             case "DELETE":
                 handleDeleteTask(exchange);
                 break;
+            case "OPTIONS":
+                handleOptionsRequest(exchange);
+                break;
             default:
                 break;
         }
+    }
+
+    private static void handleOptionsRequest(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(NO_CONTENT, -1);
+        exchange.close();
     }
 
     private static void handleDeleteTask(HttpExchange exchange) throws IOException {
@@ -68,7 +79,8 @@ public class TaskHttpServer {
             }
             // 执行删除操作
             taskRepository.deleteTaskById(id); // 500
-            sendMsg("".getBytes(), exchange, NO_CONTENT);
+            exchange.sendResponseHeaders(NO_CONTENT, -1);
+            exchange.close();
         } catch (SQLException e) {
             sendMsg(e.getMessage().getBytes(), exchange, INTERNAL_SERVER_ERROR);
         }

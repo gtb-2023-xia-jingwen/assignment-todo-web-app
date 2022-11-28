@@ -21,7 +21,7 @@ export const deleteTask = (id) =>
   fetch(`${URL}/${id}`, {
     method: 'DELETE',
   })
-    .then((response) => response.json())
+    .then((response) => response)
     .catch((error) => {
       console.error('Error:', error);
     });
